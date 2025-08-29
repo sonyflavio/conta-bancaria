@@ -1,0 +1,1 @@
+import leia = require("readline-sync");
