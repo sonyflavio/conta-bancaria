@@ -68,7 +68,7 @@ sacar(valor: number): boolean{
 }
 
 depositar(valor: number): void{
-    this._saldo + valor
+    this._saldo = this._saldo + valor;
 
 }
 

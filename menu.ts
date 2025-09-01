@@ -1,12 +1,17 @@
 import leia = require("readline-sync");
 import { colors } from "./src/util/Colors";
 import { Conta } from "./src/model/Conta";
+import { ContaCorrente } from "./src/model/ContaCorrente";
+import { ContaPoupaca } from "./src/model/ContaPoupanca";
 
 export function main() {
 
 let opcao: number;
 let continua: Boolean = true
+
 const conta: Conta =  new Conta(11, 169, 1,'Maria', 1000);
+const contaCorrente: ContaCorrente = new ContaCorrente(12, 169, 1,'Jose', 25000, 1000);
+const contaPoupanca: ContaPoupaca = new ContaPoupaca(13, 169, 2, "Flavio", 2000, 15);
 
 while(continua){
     console.log(colors.fg.yellow,`
