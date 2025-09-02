@@ -9,7 +9,6 @@ export function main() {
 let opcao: number;
 let continua: Boolean = true
 
-const conta: Conta =  new Conta(11, 169, 1,'Maria', 1000);
 const contaCorrente: ContaCorrente = new ContaCorrente(12, 169, 1,'Jose', 25000, 1000);
 const contaPoupanca: ContaPoupaca = new ContaPoupaca(13, 169, 2, "Flavio", 2000, 15);
 
