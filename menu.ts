@@ -3,14 +3,20 @@ import { colors } from "./src/util/Colors";
 import { Conta } from "./src/model/Conta";
 import { ContaCorrente } from "./src/model/ContaCorrente";
 import { ContaPoupaca } from "./src/model/ContaPoupanca";
+import { ContaController } from "./src/controller/ContaController";
 
 export function main() {
 
-let opcao: number;
+let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+let titular: string;
+const tiposConta = ['Conta Corrente', 'Conta Poupanca']
 let continua: Boolean = true
 
-const contaCorrente: ContaCorrente = new ContaCorrente(12, 169, 1,'Jose', 25000, 1000);
-const contaPoupanca: ContaPoupaca = new ContaPoupaca(13, 169, 2, "Flavio", 2000, 15);
+let contas: ContaController = new ContaController();
+
+
+
+
 
 while(continua){
     console.log(colors.fg.yellow,`
@@ -49,10 +55,42 @@ if(opcao === 9 ){
  switch(opcao){
     case 1:
         console.log(colors.fg.whitestrong, "\n\nCriar Conta\n\n", colors.reset)
-        break;
+        console.log(colors.fg.whitestrong, "\n\nCriar Conta\n\n", colors.reset);
+
+        console.log("Digite o Número da agência: ");
+        agencia = leia.questionInt("");
+
+        console.log("Digite o Nome do Titular da conta: ");
+        titular = leia.question("");
+
+        console.log("\nDigite o tipo da Conta: ");
+        tipo = leia.keyInSelect(tiposConta, "", {cancel: false}) + 1;
+
+        console.log("\nDigite o Saldo da conta (R$): ");
+        saldo = leia.questionFloat("");
+
+        switch (tipo) {
+            case 1:
+                console.log("Digite o Limite da Conta (R$): ");
+                limite = leia.questionFloat("");
+                contas.cadastrar(
+                new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
+                break;
+
+            case 2:
+                console.log("Digite o Dia do aniversário da Conta Poupança: ");
+                aniversario = leia.questionInt("");
+                contas.cadastrar(new ContaPoupaca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+                break;
+    }
+    keyPress()
+    break;
+
 
     case 2:
         console.log("\n\nListar todas as Contas\n\n")
+        contas.listarTodas();
+        keyPress()
         break;
 
     case 3:
@@ -86,6 +124,12 @@ if(opcao === 9 ){
 
 }
     
+}
+
+
+function keyPress() {
+  console.log("\nPressione ENTER para continuar...");
+  leia.question(""); // espera o usuário apertar ENTER
 }
 
 export function sobre(): void{
