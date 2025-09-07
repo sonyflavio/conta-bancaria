@@ -95,14 +95,66 @@ if(opcao === 9 ){
 
     case 3:
         console.log("\n\nConsultar dados da conta - por número\n\n")
+
+        console.log("Digite o numero da Conta: ")
+        numero = leia.questionInt("");
+        contas.procurarPorNumero(numero);
+
+        keyPress()
         break;
     
     case 4:
         console.log("\n\nAtualizar dados da Conta\n\n")
-        break;
+
+        console.log("Digite o número da Conta: ");
+    numero = leia.questionInt("");
+
+    let conta = contas.buscarNoArray(numero);
+
+    if (conta != null) {
+
+        console.log("Digite o Número da agência: ");
+        agencia = leia.questionInt("");
+
+        console.log("Digite o Nome do Titular da conta: ");
+        titular = leia.question("");
+
+        tipo = conta.tipo;
+
+        console.log("\nDigite o Saldo da conta (R$): ");
+        saldo = leia.questionFloat("");
+
+        switch (tipo) {
+            case 1:
+                console.log("Digite o Limite da Conta (R$): ");
+                limite = leia.questionFloat("");
+                contas.atualizar(
+                    new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+                break;
+            case 2:
+                console.log("Digite o Dia do aniversário da Conta Poupança: ");
+                aniversario = leia.questionInt("");
+                contas.atualizar(new ContaPoupaca(numero, agencia, tipo, titular, saldo,
+                    aniversario));
+                break;
+        }
+
+    } else {
+        console.log(colors.fg.red, "\nA Conta numero: " + numero +
+            " não foi encontrada!", colors.reset);
+    }
+
+    keyPress()
+    break;
         
     case 5:
-        console.log("\n\nApagar uma Conta\n\n")
+        console.log("\n\nApagar uma Conta\n\n");
+
+        console.log("Digite o numero da Conta: ");
+        numero = leia.questionInt("");
+        contas.deletar(numero);
+
+        keyPress()
         break;
         
     case 6:
